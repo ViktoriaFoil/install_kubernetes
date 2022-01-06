@@ -1,0 +1,13 @@
+---
+- hosts: 127.0.0.1
+
+  vars:
+    files:
+      - inventory.yml
+
+  tasks:
+    - name: change
+      template:
+        src: "{{ item }}.j2"
+        dest: "{{ item }}"
+      loop: "{{ files }}"
