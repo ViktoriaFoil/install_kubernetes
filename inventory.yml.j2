@@ -3,5 +3,6 @@ all:
     bot:
       ansible_host: {{ HOSTIP }}
       ansible_user: foilv
+      ansible_connection: ssh
       ansible_password: "{{ USERPASS }}"
       ansible_become_password: "{{ ROOTPASS }}"
