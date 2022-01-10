@@ -25,8 +25,8 @@ jobs:
         run: ls
 
       - name: run playbook initial_installation.yml
-        #env:
-          #ANSIBLE_HOST_KEY_CHECKING: False
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: False
         run: ansible-playbook -i inventory.yml --extra-vars "@vars.yml" install_k3s.yml -u foilv
 
           
