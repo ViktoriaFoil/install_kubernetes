@@ -18,9 +18,6 @@ jobs:
           DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
         run: echo $DEPLOY_KEY | base64 --decode > key | chmod 0600 key
       
-      - name: ls
-        run: ls -al
-    
       - name: install plugin
         run: ansible-galaxy install geerlingguy.docker
 
