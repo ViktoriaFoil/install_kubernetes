@@ -19,7 +19,7 @@ jobs:
         run: echo $DEPLOY_KEY | base64 --decode > key | chmod 0600 key
     
       - name: install plugin
-        run: ansible-galaxy collection install ansible.utils 
+        run: ansible-galaxy install geerlingguy.docker
 
       - name: run playbook replacing-variables.yml 
         env:
