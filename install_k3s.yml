@@ -71,12 +71,6 @@
       name: bitnami
       repo_url: https://charts.bitnami.com/bitnami
 
-  - name: Copying file /etc/rancher/k3s/k3s.yaml to /home/vika/.kube/config 
-    ansible.builtin.fetch:
-      src:  "/etc/rancher/k3s/k3s.yaml"
-      dest: "/home/vika/.kube/config"
-      flat: yes
-
   - name: Copying file /etc/rancher/k3s/k3s.yaml to /home/foilv/.kube/config
     ansible.builtin.copy:
       src:  "/etc/rancher/k3s/k3s.yaml"
@@ -91,7 +85,6 @@
       path: "/home/foilv/.kube/config"
       state: file
       owner: foilv
-      group: foilv
       mode: "0600"
       
   roles:
