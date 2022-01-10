@@ -26,25 +26,9 @@ jobs:
           PASS: ${{ secrets.PASSFORSECRET }}
         run: echo $PASS > password | ansible-playbook --extra-vars="@secretbot.yml" --vault-password-file password replacing-variables.yml
 
-      - name: Run playbook
+      - name: run playbook initial_installation.yml
         env:
           ANSIBLE_HOST_KEY_CHECKING: False
-        uses: actions/action.playbook@master
-        with:
-          playbook: install_k3s.yml
-          directory: ./
-          key: key
-          inventory: inventory.yml
-          known_hosts: .known_hosts
-          requirements: galaxy-requirements.yml
-
-
-
-
-
-      #- name: run playbook initial_installation.yml
-        #env:
-          #ANSIBLE_HOST_KEY_CHECKING: False
-        #run: ansible-playbook -i inventory.yml --extra-vars "@vars.yml" install_k3s.yml
+        run: ansible-playbook -i inventory.yml install_k3s.yml
 
           
