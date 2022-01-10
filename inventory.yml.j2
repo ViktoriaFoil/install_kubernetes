@@ -1,6 +1,7 @@
 all:
   hosts:
     bot:
+      enable_plugins: yaml
       ansible_host: {{ HOSTIP }}
       ansible_user: foilv
       ansible_connection: ssh
