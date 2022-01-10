@@ -22,7 +22,7 @@ jobs:
         run: echo $PASS > password | ansible-playbook --extra-vars="@secretbot.yml" --vault-password-file password replacing-variables.yml
 
       - name: ls
-        run: ls
+        run: ansible all --list-hosts
 
       - name: run playbook initial_installation.yml
         env:

@@ -2,8 +2,8 @@ all:
   hosts:
     bot:
       enable_plugins: yaml
-      ansible_host: {{ HOSTIP }}
-      ansible_user: foilv
-      ansible_connection: ssh
-      ansible_password: "{{ USERPASS }}"
+      ansible_ssh_host: {{ HOSTIP }}
+      ansible_ssh_port: 22
+      ansible_ssh_user: foilv
+      ansible_ssh_pass: "{{ USERPASS }}"
       ansible_become_password: "{{ ROOTPASS }}"
