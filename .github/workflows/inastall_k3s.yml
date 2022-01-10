@@ -13,6 +13,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: install authorized key id_rsa.pub
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        run: echo $DEPLOY_KEY | base64 --decode > key | chmod 0600 key
+    
       - name: install plugin
         run: ansible-galaxy collection install ansible.utils 
 
@@ -21,12 +26,25 @@ jobs:
           PASS: ${{ secrets.PASSFORSECRET }}
         run: echo $PASS > password | ansible-playbook --extra-vars="@secretbot.yml" --vault-password-file password replacing-variables.yml
 
-      - name: ls
-        run: ansible all --list-hosts
-
-      - name: run playbook initial_installation.yml
+      - name: Run playbook
         env:
           ANSIBLE_HOST_KEY_CHECKING: False
-        run: ansible-playbook -i inventory.yml --extra-vars "@vars.yml" install_k3s.yml -u foilv
+        uses: action-ansible-playbook@v2
+        with:
+          playbook: install_k3s.yml
+          directory: ./
+          key: key
+          inventory: inventory.yml
+          known_hosts: .known_hosts
+          requirements: galaxy-requirements.yml
+
+
+
+
+
+      #- name: run playbook initial_installation.yml
+        #env:
+          #ANSIBLE_HOST_KEY_CHECKING: False
+        #run: ansible-playbook -i inventory.yml --extra-vars "@vars.yml" install_k3s.yml
 
           

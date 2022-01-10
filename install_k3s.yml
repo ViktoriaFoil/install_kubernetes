@@ -1,6 +1,7 @@
 ---
 - name: k3s
   hosts: bot
+  remote_user: foilv
   become_method: sudo
   become: yes
   become_user: root
